@@ -3461,25 +3461,25 @@ async function exportASIAPdf(){
     putC(String(lPpTotal),   536,134,35,7);
     putC(String(lMotorTotal),579,134,30,7);
 
-    // ── TASK 3 / STEP 4: Full subscores strip (PDF y=84, sz=8) ─────
-    // Values are placed lower to sit inside the ASIA subscore boxes rather than over the labels.
+    // ── TASK 3 / STEP 4: Full subscores strip ─────────────────────
+    // Baseline tuned so values sit inside the ASIA subscore boxes, not on the MAX labels below.
     // UER x0=41 w=23 · UEL x0=91 w=23 · UEMS TOTAL x0=155 w=27
     // LER x0=232 w=27 · LEL x0=285 w=27 · LEMS TOTAL x0=348 w=27
     // LTR x0=510 w=25 · LTL x0=556 w=25 · LT TOTAL x0=608 w=28
     // PPR x0=675 w=25 · PPL x0=716 w=25 · PP TOTAL x0=754 w=26
-    const y4=84;
-    putC(gv('sci-uems-r'),41,y4,23,8);
-    putC(gv('sci-uems-l'),91,y4,23,8);
-    putC(String(parseInt(gv('sci-uems-r')||0)+parseInt(gv('sci-uems-l')||0)),155,y4,27,8);
-    putC(gv('sci-lems-r'),232,y4,27,8);
-    putC(gv('sci-lems-l'),285,y4,27,8);
-    putC(String(parseInt(gv('sci-lems-r')||0)+parseInt(gv('sci-lems-l')||0)),348,y4,27,8);
-    putC(String(rLtTotal),510,y4,25,8);
-    putC(String(lLtTotal),556,y4,25,8);
-    putC(String(rLtTotal+lLtTotal),608,y4,28,8);
-    putC(String(rPpTotal),675,y4,25,8);
-    putC(String(lPpTotal),716,y4,25,8);
-    putC(String(rPpTotal+lPpTotal),754,y4,26,8);
+    const y4=93;
+    putC(gv('sci-uems-r'),41,y4,23,7.5);
+    putC(gv('sci-uems-l'),91,y4,23,7.5);
+    putC(String(parseInt(gv('sci-uems-r')||0)+parseInt(gv('sci-uems-l')||0)),155,y4,27,7.5);
+    putC(gv('sci-lems-r'),232,y4,27,7.5);
+    putC(gv('sci-lems-l'),285,y4,27,7.5);
+    putC(String(parseInt(gv('sci-lems-r')||0)+parseInt(gv('sci-lems-l')||0)),348,y4,27,7.5);
+    putC(String(rLtTotal),510,y4,25,7.5);
+    putC(String(lLtTotal),556,y4,25,7.5);
+    putC(String(rLtTotal+lLtTotal),608,y4,28,7.5);
+    putC(String(rPpTotal),675,y4,25,7.5);
+    putC(String(lPpTotal),716,y4,25,7.5);
+    putC(String(rPpTotal+lPpTotal),754,y4,26,7.5);
 
     // ── STEP 5: Classification strip ─────────────────────────────
     // Sensory level R/L y=50, Motor level R/L y=36, NLI y=46
