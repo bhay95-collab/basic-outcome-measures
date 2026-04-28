@@ -2662,19 +2662,44 @@ function sciSensoryLevel(side){
 }
 
 function sciMotorLevel(side, snsLevel){
-  // Lowest key muscle with grade ≥3, with all above ≥3
-  let lastIntact = null;
+  // ISNCSCI motor level rule:
+  // The motor level is the lowest key muscle graded at least 3, provided every
+  // key muscle represented by segments above that level is intact (=5).
+  // Example: C8=3 and T1=3 gives motor level C8, not T1, because C8 is not 5.
+  let lowestQualifiedKeyLevel = null;
+  let allRostralKeyMusclesIntact = true;
+
   for(let i=0; i<SCI_MOTOR_LEVELS.length; i++){
     const lv = SCI_MOTOR_LEVELS[i];
-    const v = sciGetVal(`sci-${side}-m-${lv}`);
-    const n = sciNumVal(v);
-    if(n !== null && n >= 3) lastIntact = lv;
-    else if(v === '') break;
-    else break;
+    const raw = sciGetVal(`sci-${side}-m-${lv}`);
+    const n = sciNumVal(raw);
+
+    if(n === null){
+      // Blank/NT means the motor level cannot be extended through this key muscle.
+      break;
+    }
+
+    if(allRostralKeyMusclesIntact && n >= 3){
+      lowestQualifiedKeyLevel = lv;
+    }
+
+    if(n !== 5){
+      allRostralKeyMusclesIntact = false;
+    }
   }
-  if(lastIntact) return lastIntact;
-  // Fall back to sensory level in regions without key muscles
-  return snsLevel;
+
+  // In regions without a testable key muscle, motor level is presumed from the
+  // sensory level, but it must not pass below an abnormal key muscle result.
+  if(snsLevel && lowestQualifiedKeyLevel){
+    const snsIdx = sciLevelIndex(snsLevel);
+    const keyIdx = sciLevelIndex(lowestQualifiedKeyLevel);
+    const lastKeyIdx = sciLevelIndex(SCI_MOTOR_LEVELS[SCI_MOTOR_LEVELS.length - 1]);
+    if(snsIdx > keyIdx && keyIdx === lastKeyIdx){
+      return snsLevel;
+    }
+  }
+
+  return lowestQualifiedKeyLevel || snsLevel;
 }
 
 function sciLevelIndex(lv){
@@ -3436,12 +3461,13 @@ async function exportASIAPdf(){
     putC(String(lPpTotal),   536,134,35,7);
     putC(String(lMotorTotal),579,134,30,7);
 
-    // ── TASK 3 / STEP 4: Full subscores strip (y=93, sz=8) ───────
+    // ── TASK 3 / STEP 4: Full subscores strip (PDF y=84, sz=8) ─────
+    // Values are placed lower to sit inside the ASIA subscore boxes rather than over the labels.
     // UER x0=41 w=23 · UEL x0=91 w=23 · UEMS TOTAL x0=155 w=27
     // LER x0=232 w=27 · LEL x0=285 w=27 · LEMS TOTAL x0=348 w=27
     // LTR x0=510 w=25 · LTL x0=556 w=25 · LT TOTAL x0=608 w=28
     // PPR x0=675 w=25 · PPL x0=716 w=25 · PP TOTAL x0=754 w=26
-    const y4=93;
+    const y4=84;
     putC(gv('sci-uems-r'),41,y4,23,8);
     putC(gv('sci-uems-l'),91,y4,23,8);
     putC(String(parseInt(gv('sci-uems-r')||0)+parseInt(gv('sci-uems-l')||0)),155,y4,27,8);
