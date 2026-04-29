@@ -333,6 +333,11 @@
     .app-body{padding:0!important;max-width:100%!important}
   }
 
+  /* Dermatome map colours */
+  .sci-region-normal   { fill: #4CAF50 !important; }
+  .sci-region-impaired { fill: #FFC107 !important; }
+  .sci-region-absent   { fill: #F44336 !important; }
+
 </style>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@praxis-isncsci/ui/dist/praxis-isncsci-ui/praxis-isncsci-ui.esm.js"></script>
 </head>
@@ -994,9 +999,107 @@
             </table>
           </div>
 
-          <!-- CENTRE — Dermatome map -->
-          <div style="flex:0 0 auto;display:flex;align-items:center;padding-top:32px">
-            <praxis-isncsci-key-points-diagram id="sci-dermatome-map"></praxis-isncsci-key-points-diagram>
+          <!-- CENTRE — Dermatome map (embedded SVG) -->
+          <div style="flex:0 0 auto;display:flex;align-items:flex-start;padding-top:32px;overflow:hidden">
+            <svg width="299" height="547" id="sci-dermatome-svg" viewBox="0 0 299 547" xmlns="http://www.w3.org/2000/svg" style="display:block;flex-shrink:0">
+              <style>
+                #sci-dermatome-svg .dR{fill:#ABABAB;stroke:rgba(0,0,0,0.18);stroke-width:0.5;transition:fill 0.15s ease;cursor:default}
+                #sci-dermatome-svg .bP{fill:#e2dfd9;stroke:#b5b1aa;stroke-width:1}
+              </style>
+              <!-- Body silhouette -->
+              <ellipse class="bP" cx="149" cy="37" rx="22" ry="28"/>
+              <rect class="bP" x="138" y="64" width="22" height="24" rx="3"/>
+              <path class="bP" d="M88,88 C105,84 130,82 149,82 S193,84 210,88 L206,262 C188,272 168,276 149,276 S110,272 92,262 Z"/>
+              <path class="bP" d="M92,262 C110,272 130,276 149,276 S188,272 206,262 L202,308 C184,322 166,328 149,328 S114,322 96,308 Z"/>
+              <path class="bP" d="M44,91 C57,87 73,86 88,88 L84,191 C72,196 55,195 44,188 Z"/>
+              <path class="bP" d="M44,188 C55,195 72,196 84,191 L79,262 C68,267 52,264 42,258 Z"/>
+              <ellipse class="bP" cx="62" cy="283" rx="20" ry="19"/>
+              <path class="bP" d="M210,88 C225,86 241,87 254,91 L254,188 C243,195 226,196 214,191 Z"/>
+              <path class="bP" d="M214,191 C226,196 243,195 254,188 L256,258 C246,264 230,267 218,262 Z"/>
+              <ellipse class="bP" cx="236" cy="283" rx="20" ry="19"/>
+              <path class="bP" d="M96,308 C110,323 128,328 143,327 L141,412 C129,417 113,415 101,408 Z"/>
+              <path class="bP" d="M101,408 C113,415 129,417 141,412 L138,507 C128,512 114,511 104,505 Z"/>
+              <ellipse class="bP" cx="120" cy="524" rx="22" ry="14"/>
+              <path class="bP" d="M155,327 C170,328 188,323 202,308 L197,408 C185,415 169,417 157,412 Z"/>
+              <path class="bP" d="M157,412 C169,417 185,415 197,408 L194,505 C184,511 170,512 160,507 Z"/>
+              <ellipse class="bP" cx="178" cy="524" rx="22" ry="14"/>
+              <!-- Dermatome regions (SVG left = patient right, SVG right = patient left) -->
+              <!-- C2 -->
+              <ellipse class="dR" data-level="right-c2" cx="120" cy="48" rx="15" ry="11"><title>C2 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c2"  cx="178" cy="48" rx="15" ry="11"><title>C2 Left</title></ellipse>
+              <!-- C3 -->
+              <ellipse class="dR" data-level="right-c3" cx="131" cy="73" rx="10" ry="8"><title>C3 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c3"  cx="167" cy="73" rx="10" ry="8"><title>C3 Left</title></ellipse>
+              <!-- C4 -->
+              <ellipse class="dR" data-level="right-c4" cx="103" cy="91" rx="16" ry="8"><title>C4 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c4"  cx="195" cy="91" rx="16" ry="8"><title>C4 Left</title></ellipse>
+              <!-- T2 -->
+              <ellipse class="dR" data-level="right-t2" cx="100" cy="108" rx="12" ry="10"><title>T2 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-t2"  cx="198" cy="108" rx="12" ry="10"><title>T2 Left</title></ellipse>
+              <!-- C5 (lateral antecubital fossa) -->
+              <ellipse class="dR" data-level="right-c5" cx="56" cy="157" rx="15" ry="18"><title>C5 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c5"  cx="242" cy="157" rx="15" ry="18"><title>C5 Left</title></ellipse>
+              <!-- T1 (medial antecubital fossa) -->
+              <ellipse class="dR" data-level="right-t1" cx="77" cy="157" rx="12" ry="15"><title>T1 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-t1"  cx="221" cy="157" rx="12" ry="15"><title>T1 Left</title></ellipse>
+              <!-- C6 (thumb) -->
+              <ellipse class="dR" data-level="right-c6" cx="44" cy="274" rx="12" ry="11"><title>C6 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c6"  cx="254" cy="274" rx="12" ry="11"><title>C6 Left</title></ellipse>
+              <!-- C7 (middle finger) -->
+              <ellipse class="dR" data-level="right-c7" cx="59" cy="291" rx="10" ry="10"><title>C7 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c7"  cx="239" cy="291" rx="10" ry="10"><title>C7 Left</title></ellipse>
+              <!-- C8 (little finger) -->
+              <ellipse class="dR" data-level="right-c8" cx="75" cy="280" rx="10" ry="10"><title>C8 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-c8"  cx="223" cy="280" rx="10" ry="10"><title>C8 Left</title></ellipse>
+              <!-- T3–T12 torso bands -->
+              <rect class="dR" data-level="right-t3"  x="92"  y="122" width="57" height="13" rx="2"><title>T3 Right</title></rect>
+              <rect class="dR" data-level="left-t3"   x="150" y="122" width="57" height="13" rx="2"><title>T3 Left</title></rect>
+              <rect class="dR" data-level="right-t4"  x="92"  y="136" width="57" height="13" rx="2"><title>T4 Right</title></rect>
+              <rect class="dR" data-level="left-t4"   x="150" y="136" width="57" height="13" rx="2"><title>T4 Left</title></rect>
+              <rect class="dR" data-level="right-t5"  x="92"  y="150" width="56" height="12" rx="2"><title>T5 Right</title></rect>
+              <rect class="dR" data-level="left-t5"   x="150" y="150" width="56" height="12" rx="2"><title>T5 Left</title></rect>
+              <rect class="dR" data-level="right-t6"  x="92"  y="163" width="56" height="12" rx="2"><title>T6 Right</title></rect>
+              <rect class="dR" data-level="left-t6"   x="150" y="163" width="56" height="12" rx="2"><title>T6 Left</title></rect>
+              <rect class="dR" data-level="right-t7"  x="93"  y="176" width="55" height="12" rx="2"><title>T7 Right</title></rect>
+              <rect class="dR" data-level="left-t7"   x="150" y="176" width="55" height="12" rx="2"><title>T7 Left</title></rect>
+              <rect class="dR" data-level="right-t8"  x="93"  y="189" width="55" height="12" rx="2"><title>T8 Right</title></rect>
+              <rect class="dR" data-level="left-t8"   x="150" y="189" width="55" height="12" rx="2"><title>T8 Left</title></rect>
+              <rect class="dR" data-level="right-t9"  x="94"  y="202" width="54" height="12" rx="2"><title>T9 Right</title></rect>
+              <rect class="dR" data-level="left-t9"   x="150" y="202" width="54" height="12" rx="2"><title>T9 Left</title></rect>
+              <rect class="dR" data-level="right-t10" x="95"  y="215" width="53" height="12" rx="2"><title>T10 Right</title></rect>
+              <rect class="dR" data-level="left-t10"  x="150" y="215" width="53" height="12" rx="2"><title>T10 Left</title></rect>
+              <rect class="dR" data-level="right-t11" x="96"  y="228" width="52" height="12" rx="2"><title>T11 Right</title></rect>
+              <rect class="dR" data-level="left-t11"  x="150" y="228" width="52" height="12" rx="2"><title>T11 Left</title></rect>
+              <rect class="dR" data-level="right-t12" x="97"  y="241" width="51" height="12" rx="2"><title>T12 Right</title></rect>
+              <rect class="dR" data-level="left-t12"  x="150" y="241" width="51" height="12" rx="2"><title>T12 Left</title></rect>
+              <!-- L1 (inguinal) -->
+              <ellipse class="dR" data-level="right-l1" cx="114" cy="298" rx="20" ry="11"><title>L1 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-l1"  cx="184" cy="298" rx="20" ry="11"><title>L1 Left</title></ellipse>
+              <!-- L2 (anterior thigh) -->
+              <rect class="dR" data-level="right-l2" x="97"  y="315" width="42" height="40" rx="8"><title>L2 Right</title></rect>
+              <rect class="dR" data-level="left-l2"  x="159" y="315" width="42" height="40" rx="8"><title>L2 Left</title></rect>
+              <!-- S3 (ischial/perineal) -->
+              <ellipse class="dR" data-level="right-s3" cx="136" cy="318" rx="11" ry="10"><title>S3 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-s3"  cx="162" cy="318" rx="11" ry="10"><title>S3 Left</title></ellipse>
+              <!-- S4-5 (perianal) -->
+              <ellipse class="dR" data-level="right-s4_5" cx="141" cy="335" rx="9" ry="8"><title>S4-5 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-s4_5"  cx="157" cy="335" rx="9" ry="8"><title>S4-5 Left</title></ellipse>
+              <!-- S2 (shown medially on inner thigh in anterior view) -->
+              <ellipse class="dR" data-level="right-s2" cx="134" cy="362" rx="11" ry="15"><title>S2 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-s2"  cx="164" cy="362" rx="11" ry="15"><title>S2 Left</title></ellipse>
+              <!-- L3 (medial femoral condyle) -->
+              <ellipse class="dR" data-level="right-l3" cx="117" cy="382" rx="18" ry="16"><title>L3 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-l3"  cx="181" cy="382" rx="18" ry="16"><title>L3 Left</title></ellipse>
+              <!-- L4 (medial malleolus) -->
+              <ellipse class="dR" data-level="right-l4" cx="108" cy="457" rx="16" ry="18"><title>L4 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-l4"  cx="190" cy="457" rx="16" ry="18"><title>L4 Left</title></ellipse>
+              <!-- L5 (dorsum of foot) -->
+              <ellipse class="dR" data-level="right-l5" cx="113" cy="505" rx="18" ry="14"><title>L5 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-l5"  cx="185" cy="505" rx="18" ry="14"><title>L5 Left</title></ellipse>
+              <!-- S1 (lateral heel) -->
+              <ellipse class="dR" data-level="right-s1" cx="128" cy="528" rx="13" ry="10"><title>S1 Right</title></ellipse>
+              <ellipse class="dR" data-level="left-s1"  cx="171" cy="528" rx="13" ry="10"><title>S1 Left</title></ellipse>
+            </svg>
           </div>
 
           <!-- LEFT side inputs (Level + LT L, PP L, Motor L) -->
@@ -2592,17 +2695,52 @@ const SCI_KEY_MUSCLES = {
   L5:'Long toe extensors', S1:'Ankle plantar flexors'
 };
 
-function updateDermatomeMap(){
-  const map = document.getElementById('sci-dermatome-map');
-  if(!map) return;
-  SCI_LEVELS.forEach(lv => {
-    const attr = lv.toLowerCase().replace('-','_'); // e.g. S4-5 → s4_5
-    const rLT = sciGetVal(`sci-r-lt-${lv}`) || '0';
-    const rPP = sciGetVal(`sci-r-pp-${lv}`) || '0';
-    const lLT = sciGetVal(`sci-l-lt-${lv}`) || '0';
-    const lPP = sciGetVal(`sci-l-pp-${lv}`) || '0';
-    map.setAttribute(`right-${attr}`, `${rLT}-${rPP}`);
-    map.setAttribute(`left-${attr}`,  `${lLT}-${lPP}`);
+const DERMATOME_LEVEL_MAP = {
+  'C2':'c2','C3':'c3','C4':'c4','C5':'c5','C6':'c6','C7':'c7','C8':'c8',
+  'T1':'t1','T2':'t2','T3':'t3','T4':'t4','T5':'t5','T6':'t6','T7':'t7',
+  'T8':'t8','T9':'t9','T10':'t10','T11':'t11','T12':'t12',
+  'L1':'l1','L2':'l2','L3':'l3','L4':'l4','L5':'l5',
+  'S1':'s1','S2':'s2','S3':'s3','S4-5':'s4_5'
+};
+
+function getDermatomeMinScore(lt, pp) {
+  if(lt === null && pp === null) return null;
+  if(lt === null) return pp;
+  if(pp === null) return lt;
+  return Math.min(lt, pp);
+}
+
+function applyDermatomeColour(path, score) {
+  path.classList.remove('sci-region-normal','sci-region-impaired','sci-region-absent');
+  if(score === null) {
+    path.style.fill = '';
+  } else if(score >= 2) {
+    path.classList.add('sci-region-normal');
+  } else if(score === 1) {
+    path.classList.add('sci-region-impaired');
+  } else {
+    path.classList.add('sci-region-absent');
+  }
+}
+
+function updateDermatomeMap() {
+  SCI_LEVELS.forEach(function(lv) {
+    const attr = DERMATOME_LEVEL_MAP[lv];
+    if(!attr) return;
+    const rLTRaw = sciGetVal('sci-r-lt-' + lv);
+    const rPPRaw = sciGetVal('sci-r-pp-' + lv);
+    const lLTRaw = sciGetVal('sci-l-lt-' + lv);
+    const lPPRaw = sciGetVal('sci-l-pp-' + lv);
+    const rLT = rLTRaw !== null && /^\d+$/.test(rLTRaw) ? parseInt(rLTRaw) : null;
+    const rPP = rPPRaw !== null && /^\d+$/.test(rPPRaw) ? parseInt(rPPRaw) : null;
+    const lLT = lLTRaw !== null && /^\d+$/.test(lLTRaw) ? parseInt(lLTRaw) : null;
+    const lPP = lPPRaw !== null && /^\d+$/.test(lPPRaw) ? parseInt(lPPRaw) : null;
+    document.querySelectorAll('[data-level="right-' + attr + '"]').forEach(function(p) {
+      applyDermatomeColour(p, getDermatomeMinScore(rLT, rPP));
+    });
+    document.querySelectorAll('[data-level="left-' + attr + '"]').forEach(function(p) {
+      applyDermatomeColour(p, getDermatomeMinScore(lLT, lPP));
+    });
   });
 }
 
