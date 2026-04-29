@@ -334,6 +334,9 @@
   }
 
 </style>
+<script type="module">
+  import 'https://unpkg.com/@praxis-isncsci/ui/dist/praxis-isncsci-ui/praxis-isncsci-ui.esm.js';
+</script>
 </head>
 <body>
 
@@ -971,29 +974,52 @@
           <div><strong style="color:var(--text-2)">Motor (M):</strong> &nbsp;0–5 MRC scale &nbsp;·&nbsp; NT = Not testable &nbsp;·&nbsp; Motor cells shaded blue — key muscles only</div>
         </div>
 
-        <!-- MAIN GRID — single wide table, right and left flanking a fixed level column -->
-        <div style="overflow-x:auto">
-          <table class="sci-grid-table" style="margin:0 auto;border-collapse:separate;border-spacing:0">
-            <thead>
-              <!-- Row 1: RIGHT / Level / LEFT labels -->
-              <tr>
-                <th colspan="3" style="text-align:center;color:var(--accent);font-size:12px;font-weight:700;padding:5px 8px 2px;letter-spacing:1px;border-bottom:none">RIGHT</th>
-                <th style="border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);border-bottom:none;padding:5px 8px 2px;text-align:center;font-size:10px;font-weight:600;color:var(--text-3);letter-spacing:.5px;white-space:nowrap;width:60px">LEVEL</th>
-                <th colspan="3" style="text-align:center;color:var(--accent);font-size:12px;font-weight:700;padding:5px 8px 2px;letter-spacing:1px;border-bottom:none">LEFT</th>
-              </tr>
-              <!-- Row 2: M / LT / PP column labels -->
-              <tr>
-                <th style="text-align:center;color:var(--accent);font-size:11px;padding:2px 4px 6px;width:38px">M</th>
-                <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">LT</th>
-                <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">PP</th>
-                <th style="border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);width:60px;padding:2px 4px 6px"></th>
-                <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">LT</th>
-                <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">PP</th>
-                <th style="text-align:center;color:var(--accent);font-size:11px;padding:2px 4px 6px;width:38px">M</th>
-              </tr>
-            </thead>
-            <tbody id="sci-grid-body"></tbody>
-          </table>
+        <!-- MAIN GRID — right and left tables flanking a dermatome body map -->
+        <div style="display:flex;align-items:flex-start;gap:16px;overflow-x:auto">
+
+          <!-- RIGHT side inputs (Motor R, LT R, PP R + Level) -->
+          <div style="flex:0 0 auto">
+            <table class="sci-grid-table" style="margin:0;border-collapse:separate;border-spacing:0">
+              <thead>
+                <tr>
+                  <th colspan="3" style="text-align:center;color:var(--accent);font-size:12px;font-weight:700;padding:5px 8px 2px;letter-spacing:1px;border-bottom:none">RIGHT</th>
+                  <th style="border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);border-bottom:none;padding:5px 8px 2px;text-align:center;font-size:10px;font-weight:600;color:var(--text-3);letter-spacing:.5px;white-space:nowrap;width:60px">LEVEL</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center;color:var(--accent);font-size:11px;padding:2px 4px 6px;width:38px">M</th>
+                  <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">LT</th>
+                  <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">PP</th>
+                  <th style="border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);width:60px;padding:2px 4px 6px"></th>
+                </tr>
+              </thead>
+              <tbody id="sci-grid-body-right"></tbody>
+            </table>
+          </div>
+
+          <!-- CENTRE — Dermatome map -->
+          <div style="flex:0 0 auto;display:flex;align-items:center;padding-top:32px">
+            <praxis-isncsci-key-points-diagram id="sci-dermatome-map"></praxis-isncsci-key-points-diagram>
+          </div>
+
+          <!-- LEFT side inputs (Level + LT L, PP L, Motor L) -->
+          <div style="flex:0 0 auto">
+            <table class="sci-grid-table" style="margin:0;border-collapse:separate;border-spacing:0">
+              <thead>
+                <tr>
+                  <th style="border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);border-bottom:none;padding:5px 8px 2px;text-align:center;font-size:10px;font-weight:600;color:var(--text-3);letter-spacing:.5px;white-space:nowrap;width:60px">LEVEL</th>
+                  <th colspan="3" style="text-align:center;color:var(--accent);font-size:12px;font-weight:700;padding:5px 8px 2px;letter-spacing:1px;border-bottom:none">LEFT</th>
+                </tr>
+                <tr>
+                  <th style="border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);width:60px;padding:2px 4px 6px"></th>
+                  <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">LT</th>
+                  <th style="text-align:center;color:var(--text-2);font-size:11px;padding:2px 4px 6px;width:38px">PP</th>
+                  <th style="text-align:center;color:var(--accent);font-size:11px;padding:2px 4px 6px;width:38px">M</th>
+                </tr>
+              </thead>
+              <tbody id="sci-grid-body-left"></tbody>
+            </table>
+          </div>
+
         </div>
 
         <!-- SACRAL SPARING -->
@@ -2568,34 +2594,56 @@ const SCI_KEY_MUSCLES = {
   L5:'Long toe extensors', S1:'Ankle plantar flexors'
 };
 
+function updateDermatomeMap(){
+  const map = document.getElementById('sci-dermatome-map');
+  if(!map) return;
+  SCI_LEVELS.forEach(lv => {
+    const attr = lv.toLowerCase().replace('-','_'); // e.g. S4-5 → s4_5
+    const rLT = sciGetVal(`sci-r-lt-${lv}`) || '0';
+    const rPP = sciGetVal(`sci-r-pp-${lv}`) || '0';
+    const lLT = sciGetVal(`sci-l-lt-${lv}`) || '0';
+    const lPP = sciGetVal(`sci-l-pp-${lv}`) || '0';
+    map.setAttribute(`right-${attr}`, `${rLT}-${rPP}`);
+    map.setAttribute(`left-${attr}`,  `${lLT}-${lPP}`);
+  });
+}
+
 function buildSciGrid(){
-  const tbody = document.getElementById('sci-grid-body');
-  if(!tbody) return;
+  const tbodyR = document.getElementById('sci-grid-body-right');
+  const tbodyL = document.getElementById('sci-grid-body-left');
+  if(!tbodyR || !tbodyL) return;
+
   const tdBase = 'style="padding:2px 3px;border-bottom:1px solid var(--border);vertical-align:middle;text-align:center"';
   const tdLevel = 'style="padding:3px 8px;border-bottom:1px solid var(--border);border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);text-align:center;font-size:12px;font-weight:700;color:var(--text-2);white-space:nowrap;background:var(--surface-2);width:60px"';
   const tdMotorLevel = 'style="padding:3px 8px;border-bottom:1px solid var(--border);border-left:2px solid var(--border-strong);border-right:2px solid var(--border-strong);text-align:center;font-size:12px;font-weight:700;color:var(--accent);white-space:nowrap;background:var(--accent-light);width:60px"';
 
-  const inpSens = (id) => `<input class="sci-inp" id="${id}" type="text" maxlength="3" placeholder="—" oninput="sciValidateInp(this,2)" style="width:36px;text-align:center;background:#fffef9;border:1px solid var(--border);border-radius:4px;padding:3px 2px;font-family:'DM Mono',monospace;font-size:12px;color:#111;outline:none" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 2px rgba(35,100,153,.15)'" onblur="this.style.borderColor='';this.style.boxShadow='';sciStyleCell(this)">`;
+  const inpSens  = (id) => `<input class="sci-inp" id="${id}" type="text" maxlength="3" placeholder="—" oninput="sciValidateInp(this,2)" style="width:36px;text-align:center;background:#fffef9;border:1px solid var(--border);border-radius:4px;padding:3px 2px;font-family:'DM Mono',monospace;font-size:12px;color:#111;outline:none" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 2px rgba(35,100,153,.15)'" onblur="this.style.borderColor='';this.style.boxShadow='';sciStyleCell(this)">`;
   const inpMotor = (id) => `<input class="sci-inp sci-motor-inp" id="${id}" type="text" maxlength="3" placeholder="—" oninput="sciValidateInp(this,5)" style="width:36px;text-align:center;background:#e8f0f9;border:1px solid #b8cfe8;border-radius:4px;padding:3px 2px;font-family:'DM Mono',monospace;font-size:12px;color:#111;outline:none" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 2px rgba(35,100,153,.15)'" onblur="this.style.borderColor='';this.style.boxShadow='';sciStyleCell(this)">`;
   const emptyMotor = `<span style="display:inline-block;width:36px;color:var(--text-3);font-size:10px;text-align:center">—</span>`;
 
-  let html = '';
+  let htmlR = '', htmlL = '';
   SCI_LEVELS.forEach(lv => {
     const hasM = !!SCI_MOTOR_MAP[lv];
-    const isMotorLevel = hasM;
-    const levelTd = isMotorLevel ? tdMotorLevel : tdLevel;
+    const levelTd = hasM ? tdMotorLevel : tdLevel;
     const muscleName = SCI_KEY_MUSCLES[lv] ? `<div style="font-size:9px;font-weight:400;color:var(--text-3);margin-top:1px">${SCI_KEY_MUSCLES[lv]}</div>` : '';
-    html += `<tr>
+
+    htmlR += `<tr>
       <td ${tdBase}>${hasM ? inpMotor(`sci-r-m-${lv}`) : emptyMotor}</td>
       <td ${tdBase}>${inpSens(`sci-r-lt-${lv}`)}</td>
       <td ${tdBase}>${inpSens(`sci-r-pp-${lv}`)}</td>
+      <td ${levelTd}>${lv}${muscleName}</td>
+    </tr>`;
+
+    htmlL += `<tr>
       <td ${levelTd}>${lv}${muscleName}</td>
       <td ${tdBase}>${inpSens(`sci-l-lt-${lv}`)}</td>
       <td ${tdBase}>${inpSens(`sci-l-pp-${lv}`)}</td>
       <td ${tdBase}>${hasM ? inpMotor(`sci-l-m-${lv}`) : emptyMotor}</td>
     </tr>`;
   });
-  tbody.innerHTML = html;
+
+  tbodyR.innerHTML = htmlR;
+  tbodyL.innerHTML = htmlL;
 }
 
 function sciValidateInp(inp, maxVal){
@@ -2871,6 +2919,7 @@ function sciCalc(){
   });
   markDot('perf','isncsci', hasData);
   updateSummary();
+  updateDermatomeMap();
 }
 
 const AIS_DETAIL = {
