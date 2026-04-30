@@ -1,0 +1,21 @@
+praxis-isncsci-classification {
+  --backdrop-filter: var(--acrylic-backdrop-filter);
+  --background-color: var(--light-acrylic);
+  --box-shadow: var(--acrylic-inner-shadow), var(--shadow-medium);
+  --gap: var(--classification-gap);
+  --padding: var(--classification-padding) var(--classification-padding)
+    var(--classification-padding-bottom);
+}
+
+praxis-isncsci-classification-grid[slot='nli'],
+praxis-isncsci-classification-grid[slot='ais'] {
+  --grid-template-columns: auto;
+}
+
+praxis-isncsci-classification-grid[slot='ais'] {
+  --grid-gap: 16px;
+}
+
+praxis-isncsci-classification-grid[slot='sub-scores'] {
+  --grid-template-columns: auto auto auto auto;
+}

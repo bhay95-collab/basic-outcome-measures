@@ -1,0 +1,52 @@
+@import url('_tokens.css');
+@import url('_text-scale.css');
+@import url('_anal-function.css');
+@import url('_app-bar.css');
+@import url('_buttons.css');
+@import url('_cell.css');
+@import url('_classification.css');
+@import url('_classification-grid.css');
+@import url('_classification-total.css');
+@import url('_dialog-header.css');
+@import url('_input-layout.css');
+@import url('_isncsci-input.css');
+
+body {
+  font-family: Inter, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+  font-weight: lighter;
+}
+
+body.app {
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(51, 47, 255, 0.2),
+    rgba(249, 107, 252, 0.5)
+  );
+}
+
+body.app::after {
+  background-image: url('../images/cross-section-blur-black.png');
+  background-blend-mode: hard-light;
+  background-position: center;
+  background-repeat: none;
+  background-size: cover;
+  content: '';
+  opacity: 20%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
